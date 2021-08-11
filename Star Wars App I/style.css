@@ -1,0 +1,180 @@
+/* Variables */
+:root {
+  --primary-color: rgb(240, 226, 29);
+}
+
+/* For all pages */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #040c14;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+input[type="text"] {
+  height: 60px;
+  padding: 20px;
+  font-family: Poppins;
+  border: 1px solid rgb(240, 226, 29);
+  border-radius: 8px;
+  width: 70%;
+  background-color: rgb(240, 226, 29);
+  font-size: 30px;
+  font-weight: 200;
+}
+
+input[type="text"]:focus {
+  border: 1px solid #e71919;
+  outline: none;
+}
+
+.button_style1 {
+  width: 100%;
+  border: 0;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0px 20px;
+  height: 50px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.button_style1:hover {
+  background-color: rgba(0, 0, 0, 0.151);
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Display Character */
+
+.show_characters {
+  width: 70%;
+  max-height: 300px;
+  border-radius: 8px;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: none;
+}
+
+.character {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(27, 36, 51);
+  color: rgb(255, 255, 255);
+  background-color: #090c18;
+  text-align: left;
+  gap: 10px;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+
+.character:hover {
+  color: black;
+  background-color: rgb(240, 226, 29);
+}
+
+.character:hover p {
+  color: black;
+}
+
+.character div {
+  flex: 1;
+}
+
+.character div p {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.character p {
+  color: rgb(240, 226, 29);
+}
+
+.character:nth-child(even) {
+  border-left: 2px solid blue;
+  border-right: 2px solid blue;
+}
+.character:nth-child(odd) {
+  border-left: 2px solid rgb(228, 53, 22);
+  border-right: 2px solid rgb(228, 53, 22);
+}
+
+/* Star wars title */
+.star_wars_title {
+  font-family: "Star Jedi";
+  -webkit-text-fill-color: rgba(
+    255,
+    255,
+    255,
+    0
+  ); /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: rgb(240, 226, 29);
+
+  -moz-text-fill-color: rgb(
+    228,
+    54,
+    54
+  ); /* Will override color (regardless of order) */
+  -moz-text-stroke-width: 3px;
+  -moz-text-stroke-color: rgb(94, 36, 36);
+  font-size: 100px;
+  line-height: 100px;
+  margin: 50px 0px;
+  text-shadow: 0 0 7px rgba(255, 255, 255, 0), 0 0 10px rgba(255, 255, 255, 0),
+    0 0 21px rgba(255, 255, 255, 0), 0 0 42px rgb(255, 0, 0),
+    0 0 82px rgb(255, 0, 0), 0 0 92px rgb(255, 0, 0), 0 0 102px rgb(255, 8, 0),
+    0 0 151px rgb(255, 0, 0);
+  animation: onoff linear infinite 4s;
+}
+
+@keyframes onoff {
+  30% {
+    text-shadow: inherit;
+  }
+  50% {
+    text-shadow: none;
+  }
+  70% {
+    text-shadow: inherit;
+  }
+}
