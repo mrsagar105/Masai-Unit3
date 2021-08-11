@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+      }
+
+      body,
+      button,
+      input[type="text"] {
+        font-family: "Poppins";
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      /* Header section */
+      header {
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .menu-and-logo-section .logo-container {
+        width: 70px;
+        overflow: hidden;
+      }
+
+      .menu-and-logo-section img {
+        width: 100%;
+      }
+
+      .search-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile {
+        width: 40px;
+        height: 40px;
+        background-color: grey;
+        border-radius: 30px;
+      }
+
+      .query {
+        width: 60%;
+        padding: 5px 10px;
+        border: 1px solid rgb(109, 109, 109);
+      }
+
+      .query:focus {
+        outline: none;
+        border: 1px solid rgb(20, 87, 212);
+      }
+
+      /* Videos section */
+      .videos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-gap: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="menu-and-logo-section">
+        <div class="menu"></div>
+        <div class="logo-container">
+          <img src="logo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="search-section">
+        <input class="query" type="text" />
+      </div>
+
+      <div class="right-options">
+        <div class="profile"></div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="videos">
+        <!-- <div class="vodeo">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div> -->
+      </div>
+    </div>
+
+    <script>
+      let videos = document.querySelector(".videos");
+
+      function showVideos(videoId) {
+        let video = document.createElement("div");
+        video.setAttribute("class", "video");
+
+        video.innerHTML = `
+      <iframe width="100%" height="140" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+
+        videos.append(video);
+      }
+
+      async function getVideos(apiquery) {
+        // fetches all the data from the api
+        // returns a response in promise that has stream of data
+        let response = await fetch(apiquery);
+
+        // so we need to response.json to convert the stream of data into one container
+        let data = await response.json();
+
+        let videosData = data.items;
+        console.log(videosData);
+
+        videosData = videosData.filter(function (el) {
+          return el.id.videoId != undefined;
+        });
+
+        //now we can access the videos data
+        // now loop through all the data and display on Page
+        videosData.forEach((video) => {
+          showVideos(video.id.videoId);
+        });
+      }
+
+      let userQuery = document.querySelector(".query");
+      userQuery.addEventListener("keydown", function (e) {
+        if (e.key == "Enter") {
+          // gets user query
+          let userQuery = document.querySelector(".query").value;
+
+          // first remove everything from videos div
+          videos.innerHTML = null;
+
+          // Run getVideos
+          getVideos(
+            `https://youtube.googleapis.com/youtube/v3/search?&q=${userQuery}&key=AIzaSyDmJBbwv3bX8Bk4oJh3ydIrMu718PkW2go&part=snippet&maxResults=20`
+          );
+        }
+      });
+
+      getVideos(
+        `https://youtube.googleapis.com/youtube/v3/search?&order=viewCount&regionCode=IN&key=AIzaSyDmJBbwv3bX8Bk4oJh3ydIrMu718PkW2go&part=snippet&maxResults=20`
+      );
+    </script>
+  </body>
+</html>
