@@ -107,9 +107,9 @@
     </div>
 
     <script>
-      function showVideos(videoId) {
-        let videos = document.querySelector(".videos");
+      let videos = document.querySelector(".videos");
 
+      function showVideos(videoId) {
         let video = document.createElement("div");
         video.setAttribute("class", "video");
 
@@ -127,7 +127,7 @@
         // fetches all the data from the api
         // returns a response in promise that has stream of data
         let response = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/search?&q=${userQuery}&key=AIzaSyDmJBbwv3bX8Bk4oJh3ydIrMu718PkW2go&part=snippet&maxResults=20`
+          `https://youtube.googleapis.com/youtube/v3/search?&q=${userQuery}&key=AIzaSyDmJBbwv3bX8Bk4oJh3ydIrMu718PkW2go&part=snippet&maxResults=24`
         );
 
         // so we need to response.json to convert the stream of data into one container
@@ -150,6 +150,9 @@
       let userQuery = document.querySelector(".query");
       userQuery.addEventListener("keydown", function (e) {
         if (e.key == "Enter") {
+          // first remove everything from videos div
+          videos.innerHTML = null;
+
           // Run getVideos
           getVideos();
         }
